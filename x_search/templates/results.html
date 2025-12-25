@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ query }} - X-Crop{% endblock %}
+
+{% block content %}
+<header class="results-header">
+    <div class="header-logo">
+        <a href="/">X-Crop</a>
+    </div>
+    <form action="/search" method="get" class="search-form-header">
+        <input type="text" name="q" value="{{ query }}" required>
+        <button type="submit">Search</button>
+    </form>
+</header>
+
+<div class="results-container">
+    {% if ai_summary %}
+    <div class="ai-overview">
+        <h3>✨ AI Overview for "{{ query }}"</h3>
+        <p>{{ ai_summary }}</p>
+    </div>
+    {% endif %}
+
+    <div class="search-results">
+        {% if results %}
+            {% for result in results %}
+            <div class="result-card">
+                <a href="{{ result.url }}" class="result-title">{{ result.title }}</a>
+                <div class="result-url">{{ result.url }}</div>
+                <div class="result-desc">{{ result.description }}</div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>No results found for "{{ query }}".</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
