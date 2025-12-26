@@ -72,5 +72,13 @@ def search():
 
     return render_template('results.html', query=query, results=results, ai_summary=ai_summary)
 
+from flask import redirect
+
+@app.route('/feeling-ai')
+def feeling_ai():
+    # Mock "I'm Feeling Lucky" behavior: redirect to a random or specific AI topic
+    # Using a 302 Found redirect
+    return redirect('/search?q=Artificial+Intelligence', code=302)
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
